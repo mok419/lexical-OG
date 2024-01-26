@@ -438,7 +438,9 @@ function onPasteForRichText(
         event instanceof InputEvent || event instanceof KeyboardEvent
           ? null
           : event.clipboardData;
+      console.log('hi333', event, clipboardData);
       if (clipboardData != null && selection !== null) {
+        console.log('HERE55', clipboardData.getData('text/html'));
         $insertDataTransferForRichText(clipboardData, selection, editor);
       }
     },
@@ -476,7 +478,9 @@ export function eventFiles(
   if (event instanceof DragEvent) {
     dataTransfer = event.dataTransfer;
   } else if (event instanceof ClipboardEvent) {
+    console.log('WEEHOO', event);
     dataTransfer = event.clipboardData;
+    console.log('WOOHEE', dataTransfer);
   }
 
   if (dataTransfer === null) {
@@ -1033,6 +1037,8 @@ export function registerRichText(editor: LexicalEditor): () => void {
 
         const selection = $getSelection();
         if (selection !== null) {
+          console.log('dow we go here?');
+          console.log('check2', event);
           onPasteForRichText(event, editor);
           return true;
         }

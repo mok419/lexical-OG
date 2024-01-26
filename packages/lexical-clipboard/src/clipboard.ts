@@ -126,7 +126,6 @@ export function $insertDataTransferForRichText(
   editor: LexicalEditor,
 ): void {
   const lexicalString = dataTransfer.getData('application/x-lexical-editor');
-
   if (lexicalString) {
     try {
       const payload = JSON.parse(lexicalString);
@@ -134,6 +133,7 @@ export function $insertDataTransferForRichText(
         payload.namespace === editor._config.namespace &&
         Array.isArray(payload.nodes)
       ) {
+        console.log('HELLOOO FRENS');
         const nodes = $generateNodesFromSerializedNodes(payload.nodes);
         return $insertGeneratedNodes(editor, nodes, selection);
       }
@@ -143,11 +143,13 @@ export function $insertDataTransferForRichText(
   }
 
   const htmlString = dataTransfer.getData('text/html');
+  console.log('hi321133', htmlString);
   if (htmlString) {
     try {
       const parser = new DOMParser();
       const dom = parser.parseFromString(htmlString, 'text/html');
       const nodes = $generateNodesFromDOM(editor, dom);
+      console.log('hi334', dom, nodes);
       return $insertGeneratedNodes(editor, nodes, selection);
     } catch {
       // Fail silently.

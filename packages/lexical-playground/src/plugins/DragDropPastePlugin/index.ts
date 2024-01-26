@@ -29,6 +29,7 @@ export default function DragDropPaste(): null {
       DRAG_DROP_PASTE,
       (files) => {
         (async () => {
+          console.log('WOOOOOOOOOO');
           const filesResult = await mediaFileReader(
             files,
             [ACCEPTABLE_IMAGE_TYPES].flatMap((x) => x),
